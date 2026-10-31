@@ -1,8 +1,278 @@
 % Personne 3 : équations (1) à (16), Tableau I, Figures 2 et 3
-\section{Algorithm}
-\subsection{General criteria}
-Texte et équations originaux à insérer.
-\subsection{Proposed algorithm}
-Texte et équations originaux à insérer.
-\subsection{Uniformly distributed}
-Texte et équations originaux à insérer.
+% ============================================================
+%  SECTION III : OPTIMAL ROTATED CONSTELLATION ANGLE (A, B, C)
+%  A inclure dans le document principal avec : \input{section3}
+% ============================================================
+
+\section{Optimal rotated constellation angle}
+\label{sec:optimal-angle}
+
+%------------------------------------------------------------
+\subsection{General criteria for choosing rotation angles}
+\label{subsec:general-criteria}
+
+The choice of the optimal angle depends on the modulation order, channel
+type, and mapping type. This angle can only be strictly optimal for a
+particular type of channel \cite{ref16,ref17}. Nevertheless the
+values chosen in DVB-T2 specifications standard provide a performance
+improvement (compared to constellations without rotation) for all the
+channel models ranging from the classical fading channel (Rayleigh) to the
+severely faded channel (Rayleigh with erasures). The criteria used to choose
+the rotation angles used in DVB-T2 are presented as follows
+\cite{ref18}:
+
+\begin{itemize}
+  \item The minimum of the product distance (PD). In order to minimize the
+  bit error rate in the presence of non-erasing channels, it is necessary
+  to ensure a large dispersion between the rotated symbols. Let us denote
+  $\mathcal{L}$ the set of rotated symbols of angle $\theta$,
+  $u(u_1,u_2)$ and $v(v_1,v_2)$ any two symbols of $\mathcal{L}$ and the
+  terms of indices 1 and 2 representing respectively the components in
+  phase and the components in quadrature. So the minimum distance product
+  of $\mathcal{L}$ is defined in \eqref{eq:pdmin}.
+\end{itemize}
+
+\begin{equation}
+  PD_{min} = \min_{u,v}\Bigl\{\prod_{i=1}^{2}|u_i - v_i|\Bigr\}
+  \label{eq:pdmin}
+\end{equation}
+
+The criterion associated with this parameter is that of the parameter's
+maximization in order to find the angle $\gamma$ defined in
+\eqref{eq:gamma} giving this maximum
+
+\begin{equation}
+  \gamma = \operatorname*{arg\,max}_{\theta}
+  \Bigl\{\min_{u,v}\Bigl\{\prod_{i=1}^{2}|u_i - v_i|\Bigr\}\Bigr\}
+  \label{eq:gamma}
+\end{equation}
+
+\begin{itemize}
+  \item The smallest difference between the values of a component is called
+  one-dimensional minimum distance and denoted 1Dmin. It must be maximized
+  in order to reduce the bit error rate in the presence of an erasure
+  channel.
+
+  \item After the rotated constellation, in the presence of erasing
+  channels, the constellation cartography changes. It is therefore defined
+  by dHavg, the average Hamming distance between two adjacent symbols of the
+  constellation (evaluated according to the Euclidean distance in two
+  dimensions). The optimal angle is chosen such that dHavg is as small as
+  possible.
+
+  \item Similarly, the Hamming distance between two adjacent symbols of the
+  constellation (evaluated according to the distance 1Dmin) is defined by
+  dH1D. To improve the bit error rate Bit Error Rate (BER) for high Signal
+  to Noise Ratio (SNR) values, the rotation angle should be chosen so that
+  dH1D is as small as possible.
+\end{itemize}
+
+These DVB-T2 standard's criteria contribute to obtain the angle values
+presented in the table~\ref{tab:angles-dvbt2}
+
+\begin{table}[!t]
+  \renewcommand{\arraystretch}{1.1}
+  \caption{Rotated constellation angle used in DVB-T2}
+  \label{tab:angles-dvbt2}
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Modulation     & 4-QAM & 16-QAM & 64-QAM & 256-QAM \\
+    \hline
+    Angle (degree) & 29.0  & 16.8   & 8.6    & $\arctan(1/16)$ \\
+    \hline
+    Angle (radian) & 0.506 & 0.293  & 0.150  & 0.06 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+%------------------------------------------------------------
+\subsection{Proposed algorithm for determining the optimal rotated
+constellation angle}
+\label{subsec:algorithm}
+
+For a conventional QAM constellation of order $M$, the in-phase and
+quadrature components have the same distribution of values defined in
+\eqref{eq:distribution}.
+
+\begin{equation}
+  A = \beta\bigl(-\sqrt{M} + 1 + 2i\bigr), \quad i = 0,1,2,\ldots,M-1
+  \label{eq:distribution}
+\end{equation}
+
+where $\beta$ is the normalization factor. According to the conservation
+laws and properties of a rotation of the plane, the distribution of the
+values of the in-phase component value of the QAM symbols remains the same
+as that of the values of the quadrature component values after rotated
+constellation. Thus the analysis of the criteria for choosing the angle will
+be done on a single component. The choice of the optimal angle is made based
+on the criterion of the maximum differentiation between the values of one of
+the components. The analysis of this criterion will be made on a single
+component, given the symmetrical nature of the two components. On the other
+hand, the constellation being square, it remains invariant when the rotation
+angle is 90 degrees. Rotated constellation of angles $x$ degree and
+$(90-x)$ degree (complementary angles), $x$ being between 0 and 90, give
+rotated QAM constellations%
+%--- Figure 2 : placee ici, au milieu de la phrase, comme dans l'article ---
+\begin{figure}[!t]
+  \centering
+  \input{images/fig2_tikz}
+  \caption{Optimal angle determination: Case of 4-QAM}
+  \label{fig:optimal-angle-4qam}
+\end{figure}
+\ symmetrical with respect to the axes of the two components (in phase and
+in quadrature).
+
+It is shown that any distribution of the possible values of each component
+is found in the range of angle values between 0 degrees and 45 degrees. The
+proposed algorithm is based on scanning the values of rotation angles
+between 0 degrees and 45 degrees following a well-defined step. in order to
+find the angle giving for a given component, a better differentiation
+between the values of this component of the set of QAM symbols. This search
+allows to identify for a given rotation angle, the smallest difference
+between the I component values or the Q component values after rotation.
+Then it finds for which angle the smallest difference is the greatest. This
+principle ensures a considerable difference between all the component values
+considered. For a chosen component, considering a QAM modulation of order
+$M$, we obtain $M$ distinct values for the set of QAM symbols after rotated
+constellation instead of $\sqrt{M}$ distinct values for a conventional QAM
+constellation.
+
+For a certain angle of rotation $\theta$, calculating the smallest
+difference between the values of a component amounts to evaluating
+deviations then determine by comparison the minimum. the number of
+deviations to calculate is defined in \eqref{eq:deviations}
+
+\begin{equation}
+  C_M^2 = \frac{M!}{2!\,(M-2)!} = \frac{M \times (M-1)}{2}
+  \label{eq:deviations}
+\end{equation}
+
+To reduce the number of deviations to be calculated, one can first arrange
+in the increasing order the $M$ distinct values obtained for the considered
+2 component of the set of QAM symbols. Using this method, $(M-1)$ deviation
+is therefore obtained like the difference between a value of the component
+considered and its previous one in the new ordered list.
+
+%------------------------------------------------------------
+\subsection{Uniformly distributed rotated constellation}
+\label{subsec:uniform}
+
+The uniform rotation angle is the one giving a distribution of components
+where each component values (I or Q component) are uniformly spaced after
+rotated constellation. For an $M$-QAM constellation, denoted by a column in
+Fig.~\ref{fig:matrix-16qam}, $\sqrt{M}$ symbols is arranged vertically. The
+number of columns will be considered from left to right and the number of
+symbols in a column, from top to bottom as a dot matrix.
+
+%--- Figure 3 -------------------------------------------------
+\begin{figure}[!t]
+  \centering
+  \input{images/fig3_tikz}
+  \caption{Matrix configuration of a 16-QAM constellation}
+  \label{fig:matrix-16qam}
+\end{figure}
+
+Given a conventional $M$-QAM constellation, after a rotation of angle
+$\phi$, the symbol $S = S_I + jS_Q$ becomes $Z = Z_I + jZ_Q$ defined in
+\eqref{eq:rotation} and in \eqref{eq:components}.
+
+\begin{equation}
+  Z = S e^{j\phi} = Z_I + jZ_Q
+  \label{eq:rotation}
+\end{equation}
+
+\begin{equation}
+  \left\{
+  \begin{array}{rcl}
+    Z_I & = & S_I \times \cos\phi - S_Q \times \sin\phi \\
+    Z_Q & = & S_I \times \sin\phi + S_Q \times \cos\phi
+  \end{array}
+  \right.
+  \label{eq:components}
+\end{equation}
+
+For a given column, after applying the rotation angle $\phi$, the distance
+between the consecutive in-phase components $Z_{1I}, Z_{2I}$ of two rotated
+symbols: $Z_1, Z_2$ is defined in \eqref{eq:dz}.
+
+\begin{equation}
+  D = \Delta Z_I = |Z_{2I} - Z_{1I}| = 2 \times \beta \times \sin\phi
+  \label{eq:dz}
+\end{equation}
+
+\noindent. With $\beta$ the normalization factor which varies according to
+the modulation order \cite{ref6}. Indeed, the components of a
+conventional $M$-QAM constellation follow the distribution defined in
+\eqref{eq:distribution}.
+
+The distance between the in-phase components $S_{1I}, S_{2I}$ of two
+consecutive symbols $S_1, S_2$ of a column of the conventional constellation
+is therefore $2 \times \beta$.
+
+This distance changes after a rotation angle $\phi$ and therefore becomes
+$D$ defined in \eqref{eq:d9}.
+
+\begin{equation}
+  D = \Delta Z_I = \Delta S_I \times \cos\phi - \Delta S_Q \times \sin\phi
+  \label{eq:d9}
+\end{equation}
+
+With $\Delta$ the variation operator, deviations between the components of
+the consecutive symbols.
+
+\begin{equation}
+  \Delta S_I = |S_{1I} - S_{2I}|, \quad \Delta S_Q = |S_{1Q} - S_{2Q}|,
+  \label{eq:deltas}
+\end{equation}
+
+\noindent. Since $S_1, S_2$ are on the same column,
+
+\begin{equation}
+  S_{1I} = S_{2I}, \quad \Delta S_I = 0, \quad \Delta S_Q = 2 \times \beta
+  \label{eq:same-column}
+\end{equation}
+
+\begin{equation}
+  \textit{Hence}, \quad D = 2 \times \beta \times \sin\phi
+  \label{eq:d12}
+\end{equation}
+
+To perform a rotated constellation inducing the uniform distribution of the
+I and Q component values, it is necessary that after rotated constellation:
+
+\begin{itemize}
+  \item The in-phase component of symbol number $\sqrt{M}$ of the $n$th
+  column ($n = 1,\ldots,\sqrt{M}-1$) is greater than the in-phase component
+  of symbol number 1 of the $(n+1)$ $n$th column.
+
+  \item The difference $E$ between the in-phase components of these two
+  symbols is equal to $D$.
+\end{itemize}
+
+Using \eqref{eq:d9} stated above, the equation presented in
+\eqref{eq:e13} is find.
+
+\begin{equation}
+  E = 2 \times \beta \times \cos\phi
+      - 2 \times \beta \times (\sqrt{M} - 1) \times \sin\phi
+  \label{eq:e13}
+\end{equation}
+
+By performing the matching between $E$ and $D$ like $E = D$, the following
+equations are obtained.
+
+\begin{equation}
+  \tan\phi = \frac{1}{\sqrt{M}}
+  \label{eq:tan}
+\end{equation}
+
+\begin{equation}
+  \textit{Let}, \phi = \arctan\frac{1}{\sqrt{M}},
+  \label{eq:let}
+\end{equation}
+
+\begin{equation}
+  D = 2 \times \beta \times \sin\Bigl(\arctan\frac{1}{\sqrt{M}}\Bigr)
+  \label{eq:d16}
+\end{equation}

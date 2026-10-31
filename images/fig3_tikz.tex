@@ -1,0 +1,16 @@
+% Fig. 3 : Matrix configuration of a 16-QAM constellation -- dessinee en TikZ
+\begin{tikzpicture}[font=\tiny\bfseries,
+  hd/.style={align=center,inner sep=1pt},
+  pt/.style={circle,fill=black,inner sep=0.6pt}]
+  % colonnes
+  \foreach \c/\t in {1/1st,2/2nd,3/3rd,4/4th}{
+    \node[hd] at (0.65*\c+0.55,0.35) {\t\\Column};
+    \draw[-{Stealth[length=3pt]},blue!70!black,line width=0.8pt] (0.65*\c+0.55,-0.1) -- (0.65*\c+0.55,-0.45);
+    \foreach \r in {1,2,3,4} \node[pt] at (0.65*\c+0.55,-0.45*\r-0.35) {};
+  }
+  % lignes
+  \foreach \r/\t in {1/1st,2/2nd,3/3rd,4/4th}{
+    \node[hd] at (-0.15,-0.45*\r-0.35) {\t\\Symbol};
+    \draw[-{Stealth[length=3pt]},blue!70!black,line width=0.8pt] (0.2,-0.45*\r-0.35) -- (0.6,-0.45*\r-0.35);
+  }
+\end{tikzpicture}
