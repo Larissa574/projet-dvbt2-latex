@@ -10,18 +10,47 @@
 
 \begin{document}
 \title{Optimal M-QAM rotated constellation angle in DVB-T2}
-% TODO Personne 1: recopier les auteurs et affiliations de l'article.
-\author{\IEEEauthorblockN{Auteurs de l'article original}
-\IEEEauthorblockA{Affiliations de l'article original}}
+
+\author{
+\IEEEauthorblockN{Daniel Agani}
+\IEEEauthorblockA{LETIA (of Polytech. Sch.\\
+of Abomey-Calavi)\\
+University of Abomey-Calavi\\
+Calavi, Benin\\
+aganiel27@gmail.com}
+\and
+
+\IEEEauthorblockN{Anne-Carole Honfoga}
+\IEEEauthorblockA{LETIA (of Polytech. Sch.\\
+of Abomey-Calavi)\\
+University of Abomey-Calavi\\
+Calavi, Benin\\
+annecarole.honfoga@uac.bj\\
+anne.carole.honfoga@umons.ac.be}
+\and
+
+\IEEEauthorblockN{Patrick Sotindjo}
+\IEEEauthorblockA{LETIA (of Polytech. Sch.\\
+of Abomey-Calavi)\\
+ENSET Lokossa\\
+National University of Sciences,\\
+Technologies, Engineering and Mathematics\\
+Lokossa, Benin\\
+sotindjo.patrick@unstim.bj}}
+
+\IEEEpubid{\makebox[\columnwidth]{978-1-6654-5054-6/22/\$31.00 \copyright 2022 IEEE \hfill}
+\hspace{\columnsep}\makebox[\columnwidth]{ }}
+
 \maketitle
 
+\IEEEpubidadjcol
+
 \begin{abstract}
-% TODO : recopier le résumé exact.
-Résumé à recopier depuis le paper original.
+One decade ago, Signal Space Diversity (SSD) technique was firstly proposed in the Digital Video Broadcasting - Terrestrial second generation (DVB-T2) standard to increase the system performance under fading channels. This technique is based on two main signal processing techniques such as the rotated constellation which creates correlation between symbols and the cyclic Q delay insertion between the symbol components which increases the diversity order. Depending on the choice of the rotation angle, the performance induced by this technique varies. The rotation angle selection becomes a relevant step in the system designing process. The proposed angles existing in the DVB-T2 implementation guidelines provide system performance under the classical Rayleigh channel. However, their performance are poor under others channels like Rayleigh with erasure. Therefore, others angles have been proposed in the scientific literature to increase the system performance under highly frequency selective channels. But, the algorithm used to select these angles has not been highlighted and the criteria used to identify them has not yet presented. This paper aims to provide details about the algorithm of detection of the optimal rotation angle used to provide a better system performance under highly frequency selective channels. It proposes the criterion of maximum differentiation between the In-phase or Quadrature components. These angles presents some properties that allow to decrease the demapping complexity.
 \end{abstract}
+
 \begin{IEEEkeywords}
-DVB-T2, M-QAM
-% TODO : remplacer par les mots-clés exacts.
+rotated constellation, angles, diversity, algorithm, DVB-T2
 \end{IEEEkeywords}
 
 \input{sections/01_intro}
