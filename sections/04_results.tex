@@ -1,9 +1,216 @@
 % Personne 4 : Sections IV, V et VI, Acknowledgment, tableaux II-IV, Figures 4 et 5
 \section{Results}
-Texte original, tableaux et figures à insérer.
+In this section, the results obtained in this are
+presented in two parts. The first part presents
+the optimal angle obtained and the second part
+presents the result obtained when rotated
+constellation is used or not in the presence of
+Gaussian noise.
+\subsection{Optimal angle detection}
+
+The optimal angle detection algorithm previously
+presented has been used to find a corresponding
+angle value to each QAM modulation order.
+Table~\ref{tab:angles} presents three angle
+values such as the optimal angle identified
+using the proposed algorithm, the angle used
+in DVB-T2 and the angle proposed in the
+literature.
+
+\begin{table}[t]
+    \centering
+    \caption{Comparison of the angles adopted by
+    the DVB-T2 standard to those proposed.}
+    \label{tab:angles}
+
+    \renewcommand{\arraystretch}{1.15}
+    \resizebox{\columnwidth}{!}{
+        \begin{tabular}{lcccc}
+            \hline
+            Modulation & 4-QAM & 16-QAM & 64-QAM & 256-QAM \\
+            \hline
+            PROPOSED (rad) & 0.464 & 0.244 & 0.123 & 0.061 \\
+            IN DVB-T2 (rad) & 0.506 & 0.293 & 0.150 & 0.060 \\
+            $\arctan(\frac{1}{\sqrt{M}})$ (rad)
+            & 0.463 & 0.244 & 0.124 & 0.062 \\
+            \hline
+        \end{tabular}
+    }
+\end{table}
+
+
+\subsection{DVB-T2 system performance}
+
+In this part, DVB-T2 system performance has been evaluated
+when only Gaussian noise is the imperfection present on
+the signal. As this system is based on Low Density Parity
+Check (LDPC) codes, Quadrature Amplitude Modulation (QAM)
+and Orthogonal Frequency Division Multiplexing (OFDM)
+techniques, the Bit Error Rate (BER) is the performance
+evaluation tool used to highlight the system performance.
+
+To confirm the good behavior of the simulator,
+simulations of the native DVB-T2 system performance have
+been performed and the obtained results have been compared
+to those highlighted in the scientific literature
+\cite{ref17} (table~\ref{tab:awgn_standard}).
+
+This is followed by the simulation results using the
+optimal angle proposed in this work. The performance
+has been evaluated under the AWGN channel with and
+without rotated constellation using 16-QAM and 256-QAM
+modulations and LDPC code rate 1/2.
+
+The evaluated performances are those giving the bit
+error rate (BER) as a function of the signal to noise
+ratio (SNR). The results obtained are presented on
+(fig.~\ref{fig:ber_rotated}) and
+(fig.~\ref{fig:ber_without_rotation}). 
+
+
+% Figure 4 : avec rotation de constellation
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\columnwidth]{images/figure4.png}
+    \caption{BER vs SNR under AWGN for 16-QAM and
+    256-QAM with rotated constellation for the
+    proposed angles}
+    \label{fig:ber_rotated}
+\end{figure}
+
+% Figure 5 : sans rotation de constellation
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\columnwidth]{images/figure5.png}
+    \caption{BER vs. SNR under AWGN for 16-QAM and
+    256-QAM without rotated constellation for the
+    proposed angles}
+    \label{fig:ber_without_rotation}
+\end{figure}
+
+
+These results in terms of performance have been compared
+to the performance specified in the document of the
+DVB-T2 standard with the use of angles recommended
+by the standard.
+
+In the DVB-T2 standard, it is noted that in the
+presence of the AWGN channel the rotated constellation
+technique does not bring any gain in terms of
+performance. The Table~\ref{tab:awgn_standard}
+shows the values specified by the standard
+\begin{table}[t]
+    \centering
+    \caption{Performance under AWGN specified
+    by the DVB-T2 standard.}
+    \label{tab:awgn_standard}
+
+    \resizebox{\columnwidth}{!}{
+        \begin{tabular}{lcccc}
+            \hline
+            Modulation & 4-QAM & 16-QAM & 64-QAM & 256-QAM \\
+            \hline
+            SNR & 1.0 & 6.2 & 10.5 & 14.4 \\
+            BER & $10^{-6}$ & $10^{-6}$ & $10^{-6}$ & $10^{-6}$ \\
+            \hline
+        \end{tabular}
+    }
+\end{table}
+
+
+\begin{table}[t]
+    \centering
+    \caption{Result of the DVB-T2 system simulation
+    under AWGN with and without rotated constellation
+    for 16-QAM and 256-QAM.}
+    \label{tab:awgn_simulation}
+
+    \resizebox{\columnwidth}{!}{
+        \begin{tabular}{lcccc}
+            \hline
+            Use case
+            & \multicolumn{2}{c}{Without rotated constellation}
+            & \multicolumn{2}{c}{With rotated constellation} \\
+            \hline
+            Modulation & 16-QAM & 256-QAM & 16-QAM & 256-QAM \\
+            SNR & 6.11 & 14.78 & 6.11 & 14.78 \\
+            BER & $10^{-3}$ & $10^{-3}$ & $10^{-3}$ & $10^{-3}$ \\
+            \hline
+        \end{tabular}
+    }
+\end{table}
+
+
+The performance presented on (fig.~\ref{fig:ber_rotated})
+and (fig.~\ref{fig:ber_without_rotation}) confirm
+the DVB-T2 standard by the fact that the rotated
+constellation does not bring any gain in the presence
+of AWGN. In addition, on these figures, although
+a BER of $10^{-6}$ has not been achieved, the obtained
+SNR values are very closer to those indicated in
+Table~\ref{tab:awgn_standard}.
+
+
 \section{Discussion}
-Texte original à insérer.
+
+The angle values obtained indicate that the proposed
+algorithm generates angle values equal to those giving
+a rotated constellation when the components are uniformly
+spaced. It should be noted that these angle values are
+not those adopted by the DVB-T2 standard.
+
+For an M-QAM modulation, these angles are generally
+written in the form $\arctan\frac{1}{\sqrt{M}}$ and
+allow to ensure an optimal distance of the components
+of the symbols when the rotated constellation is used,
+regardless of the type of channel used.
+
+Indeed a choice of rotation angles depends on several
+parameters. However the determination of these angles
+by our algorithm depends only on the mapping and the
+QAM modulation order. The impact of erasure channels
+has not been taken into account in the design of this
+algorithm. The DVB-T2 standard has not speculated on
+these angle values.
+
+The advantage of using these angles is that they have
+interesting properties allowing the development of less
+complex 2D de-mapping algorithms when the rotated
+constellation and cyclic shift techniques are used
+\cite{ref5}.
+
+Such angle values have been studied in various articles.
+Our results showed that under AWGN, the performance
+obtained with the angles of our algorithm is close to
+that specified by the DVB-T2 standard when using the
+angles of the standard. This small difference could
+be justified by the rather low number of bits
+generated during the simulation.
+
 \section{Conclusion}
-Texte original à insérer.
+
+This work focused on the study of rotated constellation
+and the determination of the optimal rotated constellation
+angle. In the first part, bibliographical synthesis has
+been presented on rotated constellation technique used
+in DVB-T2 and proposed for other standards like NOMA
+and under-water acoustic communication.
+
+Furthermore, an algorithm of detection of the optimal
+rotation angle has been proposed. The obtained angles
+have some properties that allow to establish a low
+complexity QAM demapping when rotated constellation
+is used.
+
+In perspective to our work, it will be a question of
+studying the performances of the technique of rotated
+constellation with the angles obtained and of studying
+the types of compatible channels.
+
 \section*{Acknowledgment}
-Texte original à insérer.
+
+The authors would like to thank the EPAC/
+LETIA/URPHORAN and UMONS/Electromagnetic and
+telecommunications services for their help during
+this work.
+
